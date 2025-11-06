@@ -15,6 +15,7 @@ int main() {
 
     // Render
     for (int j = 0; j < image_height; j++) {
+        std::clog << "\rScanlines remaining: " << (image_height - j) << ' ' << std::flush;
         for (int i = 0; i < image_width; i++) {
             // get pixel rgb gradient: 0-1
             auto r = double(i) / (image_width-1);
@@ -30,4 +31,5 @@ int main() {
             std::cout << ir << ' ' << ig << ' ' << ib << '\n';
         }
     }
+    std::clog << "\rDone.                 \n";
 }
