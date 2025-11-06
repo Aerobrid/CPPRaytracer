@@ -1,3 +1,6 @@
+#include "color.h"
+#include "vec3.h"
+
 #include <iostream>
 
 int main() {
@@ -15,20 +18,13 @@ int main() {
 
     // Render
     for (int j = 0; j < image_height; j++) {
+        // write to logging output stream (clog) instead of standard (cout) for msg reporting/logging
         std::clog << "\rScanlines remaining: " << (image_height - j) << ' ' << std::flush;
         for (int i = 0; i < image_width; i++) {
-            // get pixel rgb gradient: 0-1
-            auto r = double(i) / (image_width-1);
-            auto g = double(j) / (image_height-1);
-            auto b = 0.0;
-
-            // scale up pixel rgb values so they fit in range: [0, 255]
-            int ir = int(255.999 * r);
-            int ig = int(255.999 * g);
-            int ib = int(255.999 * b);
-            
-            // rgb value for a single pixel
-            std::cout << ir << ' ' << ig << ' ' << ib << '\n';
+            // Simplification:
+            // use our color (masked vec3 class) object to compute RGB values for every pixel, and write it to output
+            auto pixel_color = color(double(i)/(image_width-1), double(j)/(image_height-1), 0);
+            write_color(std::cout, pixel_color);
         }
     }
     std::clog << "\rDone.                 \n";
