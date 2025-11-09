@@ -2,9 +2,6 @@
 #ifndef VEC3_H
 #define VEC3_H
 
-#include <cmath>
-#include <iostream>
-
 // 3d-vector class
 class vec3 {
   public:
